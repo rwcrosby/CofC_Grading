@@ -1,6 +1,8 @@
 #!/usr/bin/env fish
 
+###############################################################
 # Display the help text
+
 function help_msg
 
 echo "Create the base directories:
@@ -22,6 +24,7 @@ Options
 
 end
 
+###############################################################
 # Optionally create a directory
 
 function CreateDir -a dirName clearFlag
@@ -44,6 +47,9 @@ function CreateDir -a dirName clearFlag
     end
 
 end
+
+###############################################################
+# Mainline
 
 # Parse the command line
 
@@ -79,9 +85,13 @@ source $configFile
 # Create (or recreate) the directories
 
 set gradingDir "./Grading"
+set workingDir "./Grading/Working"
+set feedbackDir "./Grading/Feedback"
 set solutionDir "./ReferenceSolution"
 
 CreateDir $gradingDir $_flag_clear
+CreateDir $workingDir $_flag_clear
+CreateDir $feedbackDir $_flag_clear
 CreateDir $solutionDir $_flag_clear
 
 # Copy assignment configuration template
