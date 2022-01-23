@@ -1,0 +1,10 @@
+---
+header-includes:
+   - \usepackage{CofCGrading}
+toc: False
+lof: False
+fontsize: 11pt
+graphics: True
+mathspec: 1
+colorlinks: True
+---

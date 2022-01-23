@@ -4,6 +4,24 @@
 2. Tailor assignment specific grading configuration file
 3. Build student directories from downloaded zip file
 
+## Environment Variables
+
+Note: all variables must be exported so Python can access
+
+### Course Level `GradingConfig.sh`
+
+- `CourseNumber`
+- `CourseName`
+- `AssignName`
+
+### Student Assignment Level `Info.sh`
+
+- `StudentCode`
+- `StudentFirstName`
+- `StudentLastName`
+- `StudentTimestamp`
+- `StudentSubmissionFile`
+
 ## Scripts
 
 ### `MakeStructure.sh`
@@ -53,3 +71,42 @@ Tailor the grading template file into the student specific file
 Assumes Assign, Course, and Student environment variables are set
 
 `MakeGradingFile.py <template> <output>`
+
+## LaTeX Processing
+
+### Heading block:
+
+```
+----------------------------
+CSCI-xxx - Course Title
+Assignment Title
+
+Student Name
+
+File Submitted: filename
+
+Submission Time: timestamp
+----------------------------
+```
+
+### Related Files
+
+- `Markdown2Pdf_PandocConfig.yaml`
+
+    Pandoc configuration file
+
+- `Markdown2Pdf.py`
+
+    Python script to build a single pd
+
+- `SampleMarkdown.md`
+
+    Sample file for testing
+
+- `SamplePdf.pdf`
+
+    Sample output file from testing
+
+- `CofCGrading.sty`
+
+    Part of `SharedEnvironment/Latex`
