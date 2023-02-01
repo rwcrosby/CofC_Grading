@@ -20,6 +20,10 @@ def parse_command_line():
 
     p = argparse.ArgumentParser(description=__doc__)
 
+    p.add_argument('--late',
+                   action='store_true',
+                   help="""Assignment is late""")
+
     p.add_argument('template',
                    help="""Grading Template File (Input)""")
 
@@ -31,7 +35,7 @@ def parse_command_line():
 
 # **************************************************
 
-def run(gradefile, template):
+def run(gradefile, template, late):
 
     print(f"Creating <{gradefile}> using template file <{template}>")
 
@@ -45,6 +49,7 @@ def run(gradefile, template):
     substVars = {k: v for k, v
                  in os.environ.items()
                  if re.match(r"Assign|Course|Student", k)}
+    substVars['late'] = late
 
     # print(substVars)
 

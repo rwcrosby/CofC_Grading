@@ -31,7 +31,14 @@ Assumes `Grading` directory is pathed (via `.envrc`)
 
     From the assignment `Grading` Directory
 
-    `MakeGradingFiles.sh`
+    - On-Time Submissions
+
+        `MakeGradingFiles.sh`
+
+    - Late Submissions
+
+        `MakeGradingFiles.sh -late`
+
 
 ## Grade Assignments
 

@@ -15,6 +15,7 @@ Options
   -c, --config : override configuration file name
                  default: ./GradingConfig.sh
   --clear : Recreate all from scratch deleting contents
+  --late : Mark the assignments late
   -h : Display this help message
 "
 
@@ -25,7 +26,7 @@ end
 
 # Parse the command line
 
-argparse 'h/help' 'clear' 'c/config=' -- $argv
+argparse 'h/help' 'clear' 'late' 'c/config=' -- $argv
 or begin
     HelpMsg 
     exit
@@ -48,6 +49,13 @@ set scriptFile (status filename)
 echo  $scriptFile "starting at" (date)
 echo "Loading configuration file: $configFile"
 source $configFile
+
+if set -q _flag_late
+    set late '--late'
+end
+
+echo "Late: <$late>"
+
 
 # Loop through the student directories
 
@@ -84,7 +92,7 @@ for studentDir in (find Working -maxdepth 1 -type d)
         rm $gradeFile
     end
 
-    $pydir/MakeGradingFile.py ../../GradingTemplate.md $gradeFile
+    $pydir/MakeGradingFile.py $late ../../GradingTemplate.md $gradeFile
 
     popd
 
