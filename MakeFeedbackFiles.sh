@@ -7,14 +7,14 @@ function HelpMsg
 
 echo "Make tailored grading markdown files
 
-Run from the Grading directory
+Run from the Working directory
 
 Process
 
 Options
   -c, --config : override configuration file name
                  default: ./GradingConfig.sh
-  --clear : Recreate all from scratch deleting contents
+  --clear : Recreate all pdf files from scratch deleting originals
   -h : Display this help message
 "
 
@@ -41,7 +41,7 @@ end
 if set -q _flag_config
     set configFile $_flag_config
 else
-    set configFile ./GradingConfig.sh
+    set configFile ../GradingConfig.sh
 end
 
 set scriptFile (status filename)
@@ -53,7 +53,7 @@ source $configFile
 
 set pydir (pushd (dirname $scriptFile); pwd; popd)
 
-for studentDir in (find Working -maxdepth 1 -type d)
+for studentDir in (find . -maxdepth 1 -type d)
 
     # Change into the student directory and source the info file.
 
@@ -70,21 +70,31 @@ for studentDir in (find Working -maxdepth 1 -type d)
     end
     source Info.sh
 
-    # Tailor the grading file
+    # Locate the grading markdown file
 
-    set gradeFile "$StudentCode - $StudentLastName, $StudentFirstName.md"
+    set filename "$StudentCode - $StudentLastName, $StudentFirstName"
+    set markdownFile "$filename.md"
+    set pdfFile "$filename - Feedback.pdf"
 
-    if test -f $gradeFile
-        if not set -q _flag_clear
-            echo "Grading file <$gradeFile> exists but clear not specified"
-            popd 
-            continue
-        end
-        echo "Deleting grading file <$gradeFile>"
-        rm $gradeFile
+    if not test -f $markdownFile
+        echo "$markdownFile file not found in " (pwd)
+        popd
+        continue
     end
 
-    $pydir/MakeGradingFile.py ../../GradingTemplate.md $gradeFile
+    if test -f $pdfFile
+        if not set -q _flag_clear
+            echo "Pdf file <$pdfFile> exists but clear not specified"
+            popd
+            continue
+        end
+        echo "Deleting pdf file <$pdfFile>"
+        rm -f  $pdfFile
+    end
+
+    # Create the pdf
+
+    $pydir/Markdown2Pdf.py $markdownFile $pdfFile
 
     popd
 

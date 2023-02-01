@@ -103,7 +103,8 @@ unzip -d $unzipDirName $zipName
 
 # Loop through the submission zip files
 
-for studentZip in (find $unzipDirName -name '*.zip')
+for studentZip in (find $unzipDirName -type f -name '*')
+    echo "Zip file: $studentZip"
     set parsedName (ParseSubmissionName (basename $studentZip))
     echo "Output <$parsedName[1]><$parsedName[2]><$parsedName[3]><$parsedName[4]><$parsedName[5]>"
 
@@ -136,7 +137,9 @@ for studentZip in (find $unzipDirName -name '*.zip')
         case 'tar'
             echo ".tar file found"
         case '*'
-            echo "Uncompressed file found"
+            echo "Uncompressed file found, copying"
+            cp $studentZip Working/$studentDir
+
     end
 
     # Create a file of environment information for the student

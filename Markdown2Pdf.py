@@ -58,7 +58,7 @@ def run(mdfile, pdffile):
 
     title = f'{courseNumber} - {courseName}\\\\ \\Large {assignName}'
     author = f'{studentLastName}, {studentFirstName}'
-    date = f'File Submitted: {studentSubmissionFile}\\\\Submission Time: {studentTimestamp}'
+    date = f'File Submitted: {studentSubmissionFile}\\\\Submission Time: {studentTimestamp}'.replace('_', '\_')
 
     # Build the pdf file
 
