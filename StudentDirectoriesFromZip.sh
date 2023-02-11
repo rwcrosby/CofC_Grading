@@ -134,8 +134,9 @@ for studentZip in (find $unzipDirName -type f -name '*')
         case 'zip'
             # echo ".zip file found"
             unzip -d "Working/$studentDir" $studentZip
-        case 'tar'
+        case 'tar' 'gz'
             echo ".tar file found"
+            tar -xvf $studentZip -C "Working/$studentDir"
         case '*'
             echo "Uncompressed file found, copying"
             cp $studentZip Working/$studentDir
