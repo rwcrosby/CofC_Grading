@@ -1,4 +1,5 @@
 ---
+documentclass: md2pdf
 header-includes:
    - \usepackage{CofCGrading}
 toc: False

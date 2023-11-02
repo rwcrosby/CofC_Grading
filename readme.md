@@ -25,7 +25,7 @@ Assumes `Grading` directory is pathed (via `.envrc`)
 
     - A individually downloaded file can be processed from the `Grading` directory with
 
-        `StudentDirectoryFromDownload.sh <LastName> <FirstName> ~/Downloads/<zipname>`
+        `StudentDirectoryFromDownload.sh <LastName> <FirstName> ~/Downloads/<filename>`
 
 4. Make the grading markdown files
 
