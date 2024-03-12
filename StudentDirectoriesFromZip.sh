@@ -134,7 +134,7 @@ for studentZip in (find $unzipDirName -type f -name '*')
         case 'zip'
             # echo ".zip file found"
             unzip -d "Working/$studentDir" $studentZip
-        case 'tar' 'gz'
+        case 'tar' 'gz' 'xz'
             echo ".tar file found"
             tar -xvf $studentZip -C "Working/$studentDir"
         case '*'
